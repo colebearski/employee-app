@@ -5,21 +5,22 @@
         <div class="card p-2 m-2">
             <h4>{name}
 
-                <button class="btn btn-primary btn__first float-right" 
+                <button class="btn btn-info btn__first float-right" 
                 href="#employees_{id}" aria-controls="employees_{id}" data-target="#employees_{id}"  
                 data-toggle="collapse" data-text="Collapse">View</button>
 
-                <!-- <button class="btn btn-primary float-right" data-toggle="collapse" href="#employees_{id}" aria-expanded="false"
-                aria-controls="employees_{id}">View</button> -->
             </h4>
 
             <div class="block collapse first" id="employees_{id}">
                 <div class="block__content">
-                    Test
+                    <br />
+                    <p><strong>Position: </strong>{position}</p>
+                    <p><strong>Salary: </strong>{salary}</p>
+                    <hr>
+                    <button class="btn btn-warning edit-employee mr-2">Edit</button>
+                    <button class="btn btn-danger delete-employee">Delete</button>
                 </div>
             </div>
-
-            <!-- <div class="collapse" id="employees_{id}">Test</div> -->
 
         </div>
     {/employees}

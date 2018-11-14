@@ -3,11 +3,8 @@ var path = require("path");
 var bodyParser = require("body-parser");
 var cons = require("consolidate");
 var dust = require("dustjs-helpers");
-var pg = require("pg");
+const { Pool, Client } = require("pg");
 app = express();
-
-// DB Connect
-var connect = "postgres://admin:ktmHurricane90@localhost/employeeDB";
 
 // Assign Dust Engine to .dust files
 app.engine("dust", cons.dust);
@@ -25,7 +22,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Route
 app.get("/", function(req, res) {
-  res.render("index");
+  // Connection to DB Info
+  const pool = new Pool({
+    user: "admin",
+    host: "localhost",
+    database: "employeeDB",
+    password: 12345,
+    port: 5433
+  });
+
+  // Connection using created pool
+  pool.connect(function(err, client, done) {
+    pool.query("SELECT * FROM employees", function(err, result) {
+      if (err) {
+        return console.error("error running query", err);
+      }
+      res.render("index", { employees: result.rows });
+      done();
+    });
+  });
 });
 
 // Server

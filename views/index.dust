@@ -1,7 +1,9 @@
 {>"layout" /} 
 
 {<body}
-    This is Index
+    {#employees}
+        {name}
+    {/employees}
 {/body}
 
 

@@ -3,9 +3,17 @@ var path = require("path");
 var bodyParser = require("body-parser");
 var cons = require("consolidate");
 var dust = require("dustjs-helpers");
-
 const { Pool, Client } = require("pg");
 app = express();
+
+// DB Connection
+const pool = new Pool({
+  user: "admin",
+  host: "localhost",
+  database: "employeeDB",
+  password: 12345,
+  port: 5433
+});
 
 // Assign Dust Engine to .dust files
 app.engine("dust", cons.dust);
@@ -21,18 +29,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Routes
-// GET
+// Routes GET
 app.get("/", function(req, res) {
-  // Connection to DB Info
-  const pool = new Pool({
-    user: "admin",
-    host: "localhost",
-    database: "employeeDB",
-    password: 12345,
-    port: 5433
-  });
-
   // Connection using created pool
   pool.connect(function(err, client, done) {
     pool.query("SELECT * FROM employees", function(err, result) {
@@ -45,25 +43,14 @@ app.get("/", function(req, res) {
   });
 });
 
-// Route
-// POST
+// Routes POST
 app.post("/add", function(req, res) {
-  // Connection to DB Info
-  const pool = new Pool({
-    user: "admin",
-    host: "localhost",
-    database: "employeeDB",
-    password: 12345,
-    port: 5433
-  });
-
   // Connection using created pool
   pool.connect(function(err, client, done) {
     pool.query(
       "INSERT INTO employees(name, position, salary) VALUES($1, $2, $3) ",
       [req.body.name, req.body.position, req.body.salary]
     );
-
     done();
     res.redirect("/");
   });

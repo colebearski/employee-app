@@ -1,8 +1,11 @@
 {>"layout" /} 
 
 {<body}
+
     {#employees}
+    
         <div class="card p-2 m-2">
+                
             <h4>{name}
 
                 <button class="btn btn-info btn__first float-right" 
@@ -10,6 +13,8 @@
                 data-toggle="collapse" data-text="Collapse">View</button>
 
             </h4>
+
+            <!-- View, Edit, Delete Employee Collapse -->
 
             <div class="block collapse first" id="employees_{id}">
                 <div class="block__content">
@@ -23,7 +28,27 @@
             </div>
 
         </div>
-    {/employees}
+        
+    {/employees}  
+
+        <div class="card p-2 m-2">
+            <form method="post" action="/add">
+                <div class="form-group">
+                    <label>Employee Name</label>
+                    <input type="text" class="form-control" name="name" />
+                </div>
+                <div class="form-group">
+                    <label>Position</label>
+                    <input type="text" class="form-control" name="position" />
+                </div>
+                <div class="form-group">
+                    <label>Salary</label>
+                    <input type="text" class="form-control" name="salary" />
+                </div>
+                <input type="submit" class="btn btn-info"value="Save" />
+            </form>
+        </div>
+
 {/body}
 
 

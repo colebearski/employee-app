@@ -21,7 +21,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Route
+// Routes
+// GET
 app.get("/", function(req, res) {
   // Connection to DB Info
   const pool = new Pool({
@@ -41,6 +42,30 @@ app.get("/", function(req, res) {
       res.render("index", { employees: result.rows });
       done();
     });
+  });
+});
+
+// Route
+// POST
+app.post("/add", function(req, res) {
+  // Connection to DB Info
+  const pool = new Pool({
+    user: "admin",
+    host: "localhost",
+    database: "employeeDB",
+    password: 12345,
+    port: 5433
+  });
+
+  // Connection using created pool
+  pool.connect(function(err, client, done) {
+    pool.query(
+      "INSERT INTO employees(name, position, salary) VALUES($1, $2, $3) ",
+      [req.body.name, req.body.position, req.body.salary]
+    );
+
+    done();
+    res.redirect("/");
   });
 });
 

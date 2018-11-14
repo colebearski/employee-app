@@ -1,3 +1,4 @@
+// Toggle View for Employees
 // Map our commands to the classList methods
 const fnmap = {
   toggle: "toggle",

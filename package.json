@@ -25,6 +25,7 @@
     "dustjs-linkedin": "^2.7.5",
     "express": "^4.16.4",
     "pg": "^7.6.1",
-    "popper.js": "^1.14.5"
+    "popper.js": "^1.14.5",
+    "vanilla-modal": "^1.6.5"
   }
 }

@@ -2,3 +2,21 @@ body {
   margin-top: 10px;
   background: #f9f9f9;
 }
+
+*,
+::after,
+::before {
+  box-sizing: border-box !important;
+}
+
+.collapse {
+  display: block !important;
+  max-height: 0px !important;
+  overflow: hidden !important;
+  transition: max-height 0.5s cubic-bezier(0, 1, 0, 1) !important;
+}
+
+.show {
+  max-height: 99em !important;
+  transition: max-height 0.5s ease-in-out !important;
+}
